@@ -2,7 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const sequelize = require('./database/db');
 const bodyParser = require('body-parser');
-const User = require('./models/User');
+
+//Associantions
+require('./database/associations');
 
 //Definimos el puerto
 const PORT = process.env.PORT || 3000;
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({
 //Rutas del proyecto
 app.use('/api/v1.0/posts/', require('./routes/post'));
 app.use('/api/v1.0/users/', require('./routes/User'));
+app.use('/api/v1.0/addresses/', require('./routes/Address'));
 
 
 //Inicialización del servidor
@@ -30,6 +33,9 @@ app.listen(PORT, async () => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+
+        //True para borrar las tablas y editar los modelos
+        //False para ingresar datos y que no se borren los registros de las tablas
         await sequelize.sync({force: false});
         console.log("All models were synchronized successfully.");
 
