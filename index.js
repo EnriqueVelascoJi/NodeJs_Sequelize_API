@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({
 
 //Rutas del proyecto
 app.use('/api/v1.0/posts/', require('./routes/post'));
+app.use('/api/v1.0/users/', require('./routes/User'));
+
 
 //Inicialización del servidor
 app.listen(PORT, async () => {
