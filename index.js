@@ -30,7 +30,7 @@ app.listen(PORT, async () => {
     console.log("Server running on port: ", PORT);
 
     //Conexión a la base de datos
-    try {
+    try { 
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
 
@@ -41,5 +41,5 @@ app.listen(PORT, async () => {
 
       } catch (error) {
         console.error('Unable to connect to the database:', error);
-      }
-});
+      } 
+}); 

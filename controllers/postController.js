@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 exports.createPost = async (req, res, next) => {
 
@@ -22,9 +23,14 @@ exports.getPosts = async (req, res, next) => {
 
     
     try {
-        const posts = await Post.findAll().
-                        then(posts => posts);
-        res.json(posts);
+        await Post.findAll({
+            include: {
+                model: User, 
+            }
+        }).then(posts => {
+            res.json(posts);
+        })
+        
     } catch (error) {
         console.log(error);
         next();
@@ -96,3 +102,4 @@ exports.deletePost = async (req, res, next) => {
         next();
     }
 }
+

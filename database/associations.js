@@ -21,5 +21,21 @@ Address.belongsTo(User, { foreignKey: {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
-//Añade una llave userId a la tabla adresses
-// Address.belongsTo(User);
+
+//Relación 1:N
+//Usuario va a tner muchos posts o publicaciones
+//Se añade una clave email del usuario a la tabla post
+User.hasMany(Post, {
+    foreignKey: {
+        name: 'emailUser'
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
+Post.belongsTo(User, {
+    foreignKey: {
+        name: 'emailUser'
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
